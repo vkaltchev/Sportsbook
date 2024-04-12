@@ -30,8 +30,6 @@ extension Market {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
-        
-        // TODO: check this
         var runnersContainer = container.nestedUnkeyedContainer(forKey: .runners)
         for runner in self.runners {
             try runnersContainer.encode(runner)

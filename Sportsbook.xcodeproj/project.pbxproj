@@ -19,6 +19,16 @@
 		564A1F062BC709550012A49B /* MarketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F042BC709550012A49B /* MarketType.swift */; };
 		564A1F082BC709A00012A49B /* OddsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F072BC709A00012A49B /* OddsModel.swift */; };
 		564A1F092BC709A00012A49B /* OddsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F072BC709A00012A49B /* OddsModel.swift */; };
+		564A1F0B2BC7C6740012A49B /* SportDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F0A2BC7C6740012A49B /* SportDetailsViewModel.swift */; };
+		564A1F0C2BC7C6740012A49B /* SportDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F0A2BC7C6740012A49B /* SportDetailsViewModel.swift */; };
+		564A1F0F2BC7C78A0012A49B /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F0E2BC7C78A0012A49B /* CollectionExtension.swift */; };
+		564A1F102BC7C78A0012A49B /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F0E2BC7C78A0012A49B /* CollectionExtension.swift */; };
+		564A1F132BC9A7540012A49B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F122BC9A7540012A49B /* BaseViewController.swift */; };
+		564A1F142BC9A7540012A49B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F122BC9A7540012A49B /* BaseViewController.swift */; };
+		564A1F172BC9BD320012A49B /* SportsEventMarketSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F162BC9BD320012A49B /* SportsEventMarketSectionModel.swift */; };
+		564A1F182BC9BD320012A49B /* SportsEventMarketSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F162BC9BD320012A49B /* SportsEventMarketSectionModel.swift */; };
+		564A1F1A2BC9C12D0012A49B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F192BC9C12D0012A49B /* APIError.swift */; };
+		564A1F1B2BC9C12D0012A49B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A1F192BC9C12D0012A49B /* APIError.swift */; };
 		5682C4652BC123D20093998D /* CatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682C4632BC123D20093998D /* CatalogTableViewCell.swift */; };
 		5682C4662BC123D20093998D /* CatalogTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5682C4642BC123D20093998D /* CatalogTableViewCell.xib */; };
 		5682C46B2BC129190093998D /* SportDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682C4692BC129190093998D /* SportDetailsViewController.swift */; };
@@ -72,6 +82,11 @@
 		564A1F012BC708470012A49B /* RunnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerModel.swift; sourceTree = "<group>"; };
 		564A1F042BC709550012A49B /* MarketType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketType.swift; sourceTree = "<group>"; };
 		564A1F072BC709A00012A49B /* OddsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsModel.swift; sourceTree = "<group>"; };
+		564A1F0A2BC7C6740012A49B /* SportDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetailsViewModel.swift; sourceTree = "<group>"; };
+		564A1F0E2BC7C78A0012A49B /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		564A1F122BC9A7540012A49B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		564A1F162BC9BD320012A49B /* SportsEventMarketSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsEventMarketSectionModel.swift; sourceTree = "<group>"; };
+		564A1F192BC9C12D0012A49B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		5682C4632BC123D20093998D /* CatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableViewCell.swift; sourceTree = "<group>"; };
 		5682C4642BC123D20093998D /* CatalogTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CatalogTableViewCell.xib; sourceTree = "<group>"; };
 		5682C4692BC129190093998D /* SportDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetailsViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +145,7 @@
 		564A1EF72BC6FF710012A49B /* SportDetails */ = {
 			isa = PBXGroup;
 			children = (
+				564A1F152BC9BD060012A49B /* Models */,
 				5682C4692BC129190093998D /* SportDetailsViewController.swift */,
 				5682C46A2BC129190093998D /* SportDetailsViewController.xib */,
 				5682C46D2BC129A00093998D /* SportDetailsTableViewCell.swift */,
@@ -138,6 +154,31 @@
 				5682C4732BC17AE00093998D /* CardView.xib */,
 			);
 			path = SportDetails;
+			sourceTree = "<group>";
+		};
+		564A1F0D2BC7C7710012A49B /* Helpers, Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				564A1F0E2BC7C78A0012A49B /* CollectionExtension.swift */,
+			);
+			path = "Helpers, Extensions";
+			sourceTree = "<group>";
+		};
+		564A1F112BC9A6C50012A49B /* BaseKit */ = {
+			isa = PBXGroup;
+			children = (
+				564A1F122BC9A7540012A49B /* BaseViewController.swift */,
+			);
+			path = BaseKit;
+			sourceTree = "<group>";
+		};
+		564A1F152BC9BD060012A49B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				564A1F0A2BC7C6740012A49B /* SportDetailsViewModel.swift */,
+				564A1F162BC9BD320012A49B /* SportsEventMarketSectionModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5682C4622BC123970093998D /* Views */ = {
@@ -150,7 +191,9 @@
 		56954E6D2BBEDBFF002FC8D0 = {
 			isa = PBXGroup;
 			children = (
+				564A1F0D2BC7C7710012A49B /* Helpers, Extensions */,
 				56989F982BBF5BF000A88503 /* Scenes */,
+				564A1F112BC9A6C50012A49B /* BaseKit */,
 				56954EA92BBEE86C002FC8D0 /* APIKit */,
 				56954E782BBEDBFF002FC8D0 /* Sportsbook */,
 				56954E8F2BBEDC00002FC8D0 /* SportsbookTests */,
@@ -207,6 +250,7 @@
 				56954EAC2BBF1949002FC8D0 /* APIManager.swift */,
 				56989F8E2BBF2D2400A88503 /* APIResponse.swift */,
 				56989F902BBF4B5D00A88503 /* APIConfig.swift */,
+				564A1F192BC9C12D0012A49B /* APIError.swift */,
 			);
 			path = APIKit;
 			sourceTree = "<group>";
@@ -393,7 +437,9 @@
 				5682C4722BC17AD70093998D /* CardView.swift in Sources */,
 				56954EAD2BBF1949002FC8D0 /* APIManager.swift in Sources */,
 				56954E7E2BBEDBFF002FC8D0 /* SportsListViewController.swift in Sources */,
+				564A1F132BC9A7540012A49B /* BaseViewController.swift in Sources */,
 				564A1F022BC708470012A49B /* RunnerModel.swift in Sources */,
+				564A1F172BC9BD320012A49B /* SportsEventMarketSectionModel.swift in Sources */,
 				564A1F052BC709550012A49B /* MarketType.swift in Sources */,
 				564A1F082BC709A00012A49B /* OddsModel.swift in Sources */,
 				564A1EF92BC706F00012A49B /* SportMarketsAndEventsRequest.swift in Sources */,
@@ -401,14 +447,17 @@
 				564A1EFF2BC708180012A49B /* MarketModel.swift in Sources */,
 				56954E7A2BBEDBFF002FC8D0 /* AppDelegate.swift in Sources */,
 				56954EAB2BBF0A19002FC8D0 /* APIRequest.swift in Sources */,
+				564A1F0F2BC7C78A0012A49B /* CollectionExtension.swift in Sources */,
 				564A1EFC2BC707E90012A49B /* EventPrimaryMarketAggregateModel.swift in Sources */,
 				56954E7C2BBEDBFF002FC8D0 /* SceneDelegate.swift in Sources */,
 				56989F9C2BBF5EFE00A88503 /* SportModel.swift in Sources */,
 				56989F9F2BBF60C200A88503 /* SportsResponseModel.swift in Sources */,
+				564A1F0B2BC7C6740012A49B /* SportDetailsViewModel.swift in Sources */,
 				5682C46F2BC129A00093998D /* SportDetailsTableViewCell.swift in Sources */,
 				5682C46B2BC129190093998D /* SportDetailsViewController.swift in Sources */,
 				56989F8F2BBF2D2400A88503 /* APIResponse.swift in Sources */,
 				5682C4652BC123D20093998D /* CatalogTableViewCell.swift in Sources */,
+				564A1F1A2BC9C12D0012A49B /* APIError.swift in Sources */,
 				56989F912BBF4B5D00A88503 /* APIConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,16 +466,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				564A1F142BC9A7540012A49B /* BaseViewController.swift in Sources */,
+				564A1F182BC9BD320012A49B /* SportsEventMarketSectionModel.swift in Sources */,
 				56989F9D2BBF5EFE00A88503 /* SportModel.swift in Sources */,
 				564A1F032BC708470012A49B /* RunnerModel.swift in Sources */,
 				56989F972BBF59F100A88503 /* SportsRequest.swift in Sources */,
 				564A1F002BC708180012A49B /* MarketModel.swift in Sources */,
 				56954E912BBEDC00002FC8D0 /* SportsbookTests.swift in Sources */,
+				564A1F102BC7C78A0012A49B /* CollectionExtension.swift in Sources */,
+				564A1F1B2BC9C12D0012A49B /* APIError.swift in Sources */,
 				564A1F092BC709A00012A49B /* OddsModel.swift in Sources */,
 				564A1EFA2BC706F00012A49B /* SportMarketsAndEventsRequest.swift in Sources */,
 				56989FA02BBF60C200A88503 /* SportsResponseModel.swift in Sources */,
 				564A1EFD2BC707E90012A49B /* EventPrimaryMarketAggregateModel.swift in Sources */,
 				564A1F062BC709550012A49B /* MarketType.swift in Sources */,
+				564A1F0C2BC7C6740012A49B /* SportDetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

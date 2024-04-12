@@ -18,13 +18,3 @@ struct APIResponse<ModelType> {
         self.responseHeaders = responseHeaders
     }
 }
-
-enum APIError: Error {
-
-    case invalidSession
-    case invalidURL
-    case invalidResponse
-    case failure(Data, HTTPURLResponse)
-    case invalidData
-    case other(Error)
-}

@@ -10,22 +10,6 @@ import Foundation
 typealias HTTPHeaders = [String: String]
 
 protocol APIManagerProtocol {
-
-    /**
-     * Handles HTTP requests for specific endpoint.
-     *
-     *  - Parameters:
-     *      - endpoint: the relative address for the endpoing.
-     *      - the HTTP method that should be used (e.g. GET, POST, PUT, etc.)
-     *      - headers: a list of key-value pairs representing each HTTP header to be passed.
-     *      - body: the method payload
-     *      - type: the expected `Decodable` type to be returned from the request.
-     *      - authorized: determines whether header bearer authorisation should be used.
-     *      - refreshTokenIfNecessary: if the request fails with error 401, it will call the refreshToken method.
-     *
-     *  - Returns:
-     *      A `NetworkResult` that contains the `statusCode` and the expected response type in the `data` property.
-     */
     func execute<ModelType: Decodable>(
         request: any APIRequest,
         expectedType: ModelType.Type
@@ -36,7 +20,6 @@ protocol APIManagerProtocol {
 struct APIManager: APIManagerProtocol {
     
     private weak var urlSession: URLSession?
-//    private var authHandler: NetworkAuthHandler?
     
     private static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -79,8 +62,12 @@ struct APIManager: APIManagerProtocol {
         }
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601 // TODO: explain why it is needed
-        let object = try decoder.decode(expectedType, from: data)
-        return APIResponse(statusCode: httpResponse.statusCode, data: object, responseHeaders: httpResponse.allHeaderFields)
+        decoder.dateDecodingStrategy = .iso8601 // to be able to parse the date fields
+        do {
+            let object = try decoder.decode(expectedType, from: data)
+            return APIResponse(statusCode: httpResponse.statusCode, data: object, responseHeaders: httpResponse.allHeaderFields)
+        } catch {
+            throw APIError.failedDecoding
+        }
     }
 }

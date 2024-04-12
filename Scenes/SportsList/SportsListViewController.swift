@@ -46,10 +46,9 @@ final class SportsListViewController: UIViewController {
 extension SportsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: move this:
-        let detailsVC = SportDetailsViewController()
-        // TODO: get sport model from the view model
-        detailsVC.sportModel = sportsCatalog[indexPath.row] // TODO: safe index
+        // TODO: move this and make initializer with viewmodel
+        let sportDetailsViewModel = SportDetailsViewModel(sportModel: sportsCatalog[indexPath.row]) // TODO: safe index
+        let detailsVC = SportDetailsViewController(viewModel: sportDetailsViewModel)
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

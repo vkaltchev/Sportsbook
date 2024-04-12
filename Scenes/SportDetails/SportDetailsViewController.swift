@@ -7,94 +7,95 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
-
-struct SportsEventMarketSectionModel {
-    let dateString: String
-    var cellModels: [ConfigurableTableViewCellModel] = []
-}
-
-final class SportDetailsViewController: UIViewController {
-    
-    private let dataFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        return formatter
-    }()
-    
-    private var sportsEventMarketTableModel: [SportsEventMarketSectionModel] = []
-    private var cellModels: [ConfigurableTableViewCellModel] = []
+final class SportDetailsViewController: BaseViewController<SportDetailsViewModel> {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var data: [EventPrimaryMarketAggregate] = []
-    var sportModel: SportModel!
+    private var bindings = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = viewModel.sportModel.name
         
-        title = sportModel.name
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh(control:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         
         tableView.register(
             UINib(nibName: "\(SportDetailsTableViewCell.self)",bundle: nil),
             forCellReuseIdentifier: "\(SportDetailsTableViewCell.self)"
         )
-
-        // TODO: Move this in a view model/repository
-        Task {
-            do {
-                let sportEventRequest = SportsDetailEventsRequest(sportId: sportModel.id)
-                let response = try await APIManager().execute(
-                    request: sportEventRequest,
-                    expectedType: SportDetailEventsResponseModel.self
-                )
-                let sportsList = response.data.data
-                data = sportsList
-                print("Sports list details: \(sportsList)")
-                sportsList.forEach { eventMarketData in
-                    let sectionModel = SportsEventMarketSectionModel(dateString: eventMarketData.date.formattedWithSuffix())
-                    if !sportsEventMarketTableModel.contains(where: { section in
-                        section.dateString == sectionModel.dateString
-                    }) {
-                        sportsEventMarketTableModel.append(sectionModel)
-                    }
-                }
-          
-                sportsEventMarketTableModel = sportsEventMarketTableModel.map({ sectionModel in
-                    var cellModelsForSection: [ConfigurableTableViewCellModel] = []
-                    sportsList.forEach { eventMarketData in
-                        if sectionModel.dateString == eventMarketData.date.formattedWithSuffix() {
-                            cellModelsForSection.append(SportDetailsTableViewCellModel(eventMarketData: eventMarketData))
-                        }
-                    }
-                    return SportsEventMarketSectionModel(dateString: sectionModel.dateString, cellModels: cellModelsForSection)
-                })
-                
-                tableView.reloadData()
-            } catch {
-                print("Error: \(error.localizedDescription)")
+        
+        bindViews(with: viewModel)
+    }
+    
+    private func bindViews(with viewModel: SportDetailsViewModel) {
+        // bind title label
+        viewModel.$sportModel
+            .receive(on: RunLoop.main)
+            .sink { [weak self] sportModel in
+                self?.title = sportModel.name
             }
-        }
+            .store(in: &bindings)
+        
+        // bind loading state. TODO: Improve error handling
+        viewModel.$loadingState
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                switch viewModel.loadingState {
+                case .loading:
+                    self?.tableView.refreshControl?.beginRefreshing()
+                case .finished:
+                    self?.tableView.refreshControl?.endRefreshing()
+                case .error(let apiError):
+                    self?.showError(message: apiError.localizedDescription)
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            }
+            .store(in: &bindings)
+        
+        // bind table view with datasource model
+        viewModel.$sportsEventMarketTableModel
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &bindings)
+    }
+    
+    @objc private func didPullToRefresh(control: UIRefreshControl) {
+        viewModel.fetchAndTransformSportsEvents(forSportWith: viewModel.sportModel.id)
+    }
+    
+    private func showError(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
+// *****************************
+// MARK: TableViewDataSource
+// *****************************
 
 extension SportDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sportsEventMarketTableModel[section].dateString
+        return viewModel.sportsEventMarketTableModel[section].dateString
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        sportsEventMarketTableModel.count
+        viewModel.sportsEventMarketTableModel.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sportsEventMarketTableModel[section].cellModels.count
+        viewModel.sportsEventMarketTableModel[section].cellModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellModel = sportsEventMarketTableModel[indexPath.section].cellModels[safe: indexPath.row],
+        guard let cellModel = viewModel.sportsEventMarketTableModel[indexPath.section].cellModels[safe: indexPath.row],
               let cell = tableView.dequeueReusableCell(of: cellModel.cellType, for: indexPath) else {
             return UITableViewCell()
         }
@@ -105,44 +106,9 @@ extension SportDetailsViewController: UITableViewDataSource {
     
 }
 
-// TODO: Move
-// TODO: Check if needed - perhaps in the cells setup
-extension Collection {
-    /// Returns the element at the specified index if it is within bounds, otherwise nil.
-    subscript (safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
-
-// TODO: Move?
-extension Date {
-
-    // TODO: refactor and move this as a helper out of Date.
-    func formattedWithSuffix() -> String {
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.dateFormat = "EEEE d'\(self.daySuffix())' MMMM"
-        
-        return formatter.string(from: self)
-    }
-
-    func daySuffix() -> String {
-        let calendar = Calendar.current
-        let components = (calendar as NSCalendar).components(.day, from: self)
-        let dayOfMonth = components.day
-        switch dayOfMonth {
-        case 1, 21, 31:
-            return "st"
-        case 2, 22:
-            return "nd"
-        case 3, 23:
-            return "rd"
-        default:
-            return "th"
-        }
-    }
-}
-
+// *****************************
+// MARK: Preview support
+// *****************************
 
 struct GenericUIKitViewRepresentable<UIView: UIKit.UIView>: UIViewRepresentable {
     let uiViewType: UIView.Type
@@ -167,9 +133,9 @@ struct ViewDatePreview: PreviewProvider {
 
 struct SportDetailsVCRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> SportDetailsViewController {
-        let vc =  SportDetailsViewController()
-        vc.sportModel = SportModel(id: 1, name: "Football")
-        return vc
+        let sportDetailsViewModel = SportDetailsViewModel(sportModel: SportModel(id: 1, name: "Football"))
+        let detailsVC = SportDetailsViewController(viewModel: sportDetailsViewModel)
+        return detailsVC
     }
 
     func updateUIViewController(_ uiViewController: SportDetailsViewController, context: Context) {
@@ -177,6 +143,5 @@ struct SportDetailsVCRepresentable: UIViewControllerRepresentable {
     }
 
     typealias UIViewControllerType = SportDetailsViewController
-
 }
 
