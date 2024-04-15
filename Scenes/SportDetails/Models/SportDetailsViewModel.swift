@@ -23,11 +23,13 @@ final class SportDetailsViewModel {
         fetchAndTransformSportsEvents(forSportWith: sportModel.id)
     }
     
+    /// Fires a request for Sport events and markets and transforms the result into table datasource models.
+    /// Also changes the loadingState based on the request progress/result.
+    /// - Parameter id: The id of the sport we're requesting the events and markets for.
     func fetchAndTransformSportsEvents(forSportWith id: Int) {
         loadingState = .loading
         Task {
             do {
-                print("Requesting sport events data.")
                 let sportEventRequest = SportsDetailEventsRequest(sportId: id)
                 let response = try await APIManager().execute(
                     request: sportEventRequest,
@@ -52,6 +54,14 @@ final class SportDetailsViewModel {
                             cellModelsForSection.append(SportDetailsTableViewCellModel(eventMarketData: eventMarketData))
                         }
                     }
+                    
+                    // The separator shouldn't be visible for the last cell in the section
+                    if var lastItem = (cellModelsForSection.last as? SportDetailsTableViewCellModel) {
+                        lastItem.shouldShowSeparator = false
+                        cellModelsForSection.removeLast()
+                        cellModelsForSection.append(lastItem)
+                    }
+                   
                     return SportsEventMarketSectionModel(dateString: sectionModel.dateString, cellModels: cellModelsForSection)
                 })
                 loadingState = .finished
@@ -62,33 +72,3 @@ final class SportDetailsViewModel {
         }
     }
 }
-
-// TODO: Move?
-extension Date {
-
-    // TODO: refactor and move this as a helper out of Date.
-    func formattedWithSuffix() -> String {
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.dateFormat = "EEEE d'\(self.daySuffix())' MMMM"
-        
-        return formatter.string(from: self)
-    }
-
-    func daySuffix() -> String {
-        let calendar = Calendar.current
-        let components = (calendar as NSCalendar).components(.day, from: self)
-        let dayOfMonth = components.day
-        switch dayOfMonth {
-        case 1, 21, 31:
-            return "st"
-        case 2, 22:
-            return "nd"
-        case 3, 23:
-            return "rd"
-        default:
-            return "th"
-        }
-    }
-}
-

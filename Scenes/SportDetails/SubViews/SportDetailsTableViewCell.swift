@@ -9,16 +9,22 @@ import UIKit
 
 final class SportDetailsTableViewCell: UITableViewCell, ConfigurableTableViewCell {
 
+    // **********************************
     // MARK: - IBOutlets
+    // **********************************
     @IBOutlet private weak var typeLabel: UILabel!
     @IBOutlet private weak var homeTeamNameLabel: UILabel!
     @IBOutlet private weak var awayTeamNameLabel: UILabel!
+    @IBOutlet private weak var separatorView: UIView!
     @IBOutlet private weak var scoreCardsStackView: UIStackView!
     
-    // MARK: - Public Methods
+    // **********************************
+    // MARK: - Public methods
+    // **********************************
     func configure(with model: ConfigurableTableViewCellModel) {
         guard let model = model as? SportDetailsTableViewCellModel else { return }
         
+        separatorView.isHidden = !model.shouldShowSeparator
         typeLabel.text = model.marketName
         homeTeamNameLabel.text = model.homeTeamName
         awayTeamNameLabel.text = model.awayTeamName
@@ -54,9 +60,11 @@ final class SportDetailsTableViewCell: UITableViewCell, ConfigurableTableViewCel
     }
 }
 
+// Move to separate file
 struct SportDetailsTableViewCellModel: ConfigurableTableViewCellModel {
     
     let eventMarketData: EventPrimaryMarketAggregate
+    var shouldShowSeparator: Bool = true
     var runners: [RunnerType] {
         eventMarketData.primaryMarket.runners
     }
@@ -67,7 +75,7 @@ struct SportDetailsTableViewCellModel: ConfigurableTableViewCellModel {
         orderedTeamNames(from: eventMarketData.name)[1]
     }
     var marketName: String {
-        eventMarketData.primaryMarket.name
+        eventMarketData.primaryMarket.displayName
     }
     
     var cellType: UITableViewCell.Type {

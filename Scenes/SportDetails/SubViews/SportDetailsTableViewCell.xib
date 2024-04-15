@@ -11,33 +11,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="97" id="KGk-i7-Jjw" customClass="SportDetailsTableViewCell" customModule="Sportsbook" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="406" height="102"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="117" id="KGk-i7-Jjw" customClass="SportDetailsTableViewCell" customModule="Sportsbook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="411" height="122"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="406" height="102"/>
+                <rect key="frame" x="0.0" y="0.0" width="411" height="122"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="N4K-hO-fjj" userLabel="VerticalStackView">
-                        <rect key="frame" x="16" y="8" width="374" height="86"/>
+                        <rect key="frame" x="32" y="8" width="347" height="82"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PCF-6y-12f">
-                                <rect key="frame" x="0.0" y="0.0" width="63" height="86"/>
+                                <rect key="frame" x="0.0" y="0.0" width="63" height="82"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading.." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX6-GA-a2B">
-                                        <rect key="frame" x="0.0" y="0.0" width="63" height="19"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="18"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80k-3Y-8Kk">
-                                        <rect key="frame" x="0.0" y="27" width="63" height="23"/>
+                                        <rect key="frame" x="0.0" y="26" width="63" height="22"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpK-8P-qDQ">
-                                        <rect key="frame" x="0.0" y="58" width="63" height="28"/>
+                                        <rect key="frame" x="0.0" y="56" width="63" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
@@ -45,15 +45,24 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="JjQ-Ei-h6w" userLabel="CardsStackView">
-                                <rect key="frame" x="67" y="0.0" width="307" height="86"/>
+                                <rect key="frame" x="67" y="0.0" width="280" height="82"/>
                             </stackView>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zGd-Xc-DIg" customClass="SeparatorView" customModule="Sportsbook" customModuleProvider="target">
+                        <rect key="frame" x="32" y="106" width="347" height="8"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="8" id="G4D-xZ-iFT"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="N4K-hO-fjj" secondAttribute="trailing" constant="16" id="1uD-AN-Tfg"/>
-                    <constraint firstItem="N4K-hO-fjj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="8qG-Wo-exr"/>
-                    <constraint firstAttribute="bottom" secondItem="N4K-hO-fjj" secondAttribute="bottom" constant="8" id="sZZ-cS-Min"/>
+                    <constraint firstAttribute="trailing" secondItem="N4K-hO-fjj" secondAttribute="trailing" constant="32" id="1uD-AN-Tfg"/>
+                    <constraint firstAttribute="bottom" secondItem="zGd-Xc-DIg" secondAttribute="bottom" constant="8" id="2jN-sh-YOE"/>
+                    <constraint firstItem="N4K-hO-fjj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="8qG-Wo-exr"/>
+                    <constraint firstItem="zGd-Xc-DIg" firstAttribute="top" secondItem="N4K-hO-fjj" secondAttribute="bottom" constant="16" id="B8M-p1-JLE"/>
+                    <constraint firstItem="zGd-Xc-DIg" firstAttribute="trailing" secondItem="N4K-hO-fjj" secondAttribute="trailing" id="o0n-Wt-ZEE"/>
+                    <constraint firstItem="zGd-Xc-DIg" firstAttribute="leading" secondItem="N4K-hO-fjj" secondAttribute="leading" id="qM3-xm-ucx"/>
                     <constraint firstItem="N4K-hO-fjj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ycx-fG-7dL"/>
                 </constraints>
             </tableViewCellContentView>
@@ -63,9 +72,10 @@
                 <outlet property="awayTeamNameLabel" destination="BpK-8P-qDQ" id="qtw-dN-mYL"/>
                 <outlet property="homeTeamNameLabel" destination="80k-3Y-8Kk" id="xVH-FK-9FG"/>
                 <outlet property="scoreCardsStackView" destination="JjQ-Ei-h6w" id="eV2-d1-aX4"/>
+                <outlet property="separatorView" destination="zGd-Xc-DIg" id="KPH-Wc-qUd"/>
                 <outlet property="typeLabel" destination="gX6-GA-a2B" id="6N4-OI-n23"/>
             </connections>
-            <point key="canvasLocation" x="138.75" y="6.3380281690140849"/>
+            <point key="canvasLocation" x="143.4375" y="16.901408450704224"/>
         </tableViewCell>
     </objects>
     <resources>

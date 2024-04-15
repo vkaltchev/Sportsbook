@@ -8,9 +8,15 @@
 import Foundation
 
 struct EventPrimaryMarketAggregate: Codable {
-    let id: String // TODO: make UUID
+    let id: UUID
     let name: String
     let date: Date
     let primaryMarket: Market
 }
 
+extension EventPrimaryMarketAggregate: Equatable {
+    static func == (lhs: EventPrimaryMarketAggregate,
+                    rhs: EventPrimaryMarketAggregate) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

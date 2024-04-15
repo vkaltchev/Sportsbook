@@ -9,12 +9,16 @@ import UIKit
 
 final class CardView: UIView {
     
+    // **********************************
     // MARK: - IBOutlets
+    // **********************************
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var scoreComparisonLabel: UILabel!
     
+    // **********************************
     // MARK: - Public methods
+    // **********************************
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()

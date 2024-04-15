@@ -19,9 +19,7 @@ final class SportDetailsViewController: BaseViewController<SportDetailsViewModel
         super.viewDidLoad()
         title = viewModel.sportModel.name
         
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(didPullToRefresh(control:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        add(refreshControl: UIRefreshControl(), to: tableView)
         
         tableView.register(
             UINib(nibName: "\(SportDetailsTableViewCell.self)",bundle: nil),
@@ -69,10 +67,16 @@ final class SportDetailsViewController: BaseViewController<SportDetailsViewModel
         viewModel.fetchAndTransformSportsEvents(forSportWith: viewModel.sportModel.id)
     }
     
+    // TODO: Make error handling more abstract
     private func showError(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert) // TODO: add default message/title and move hardcoded strings from here
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func add(refreshControl: UIRefreshControl, to tableView: UITableView) {
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh(control:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
 }
 
@@ -105,43 +109,3 @@ extension SportDetailsViewController: UITableViewDataSource {
     }
     
 }
-
-// *****************************
-// MARK: Preview support
-// *****************************
-
-struct GenericUIKitViewRepresentable<UIView: UIKit.UIView>: UIViewRepresentable {
-    let uiViewType: UIView.Type
-    let configuration: (UIView) -> ()
-
-    func makeUIView(context: Context) -> UIView {
-        uiViewType.init()
-    }
-
-    func updateUIView(_ uiView: UIView, context: Context) {
-        configuration(uiView)
-    }
-}
-
-
-struct ViewDatePreview: PreviewProvider {
-    
-    static var previews: some View {
-        SportDetailsVCRepresentable()
-    }
-}
-
-struct SportDetailsVCRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> SportDetailsViewController {
-        let sportDetailsViewModel = SportDetailsViewModel(sportModel: SportModel(id: 1, name: "Football"))
-        let detailsVC = SportDetailsViewController(viewModel: sportDetailsViewModel)
-        return detailsVC
-    }
-
-    func updateUIViewController(_ uiViewController: SportDetailsViewController, context: Context) {
-        // do nothing
-    }
-
-    typealias UIViewControllerType = SportDetailsViewController
-}
-
