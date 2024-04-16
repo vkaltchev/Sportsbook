@@ -34,7 +34,10 @@ final class CardView: UIView {
         scoreComparisonLabel.text = "\(numerator) / \(denominator)"
     }
     
+    // **********************************
     // MARK: - Private methods
+    // **********************************
+    
     private func commonInit() {
         Bundle.main.loadNibNamed("CardView", owner: self)
         addSubview(contentView)

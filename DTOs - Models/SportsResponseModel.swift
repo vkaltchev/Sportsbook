@@ -11,7 +11,6 @@ struct SportsResponseModel: Codable {
     var data: [SportModel]
 }
 
-// TODO: Not used
 struct SportDetailResponseModel: Codable {
     var data: SportModel
 }

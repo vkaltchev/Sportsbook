@@ -78,6 +78,8 @@
 		56F88D652BCE1CCF00A197D1 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56596CA22BCADD7C00AD4890 /* SeparatorView.swift */; };
 		56F88D692BCE30DF00A197D1 /* SportCatalogueViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F88D682BCE30DF00A197D1 /* SportCatalogueViewModelTests.swift */; };
 		56F88D6D2BCE39C000A197D1 /* SportDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F88D6C2BCE39C000A197D1 /* SportDetailsViewModelTests.swift */; };
+		56F88D712BCE4F1200A197D1 /* SportDetailsTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F88D702BCE4F1200A197D1 /* SportDetailsTableViewCellModel.swift */; };
+		56F88D722BCE6C8400A197D1 /* SportDetailsTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F88D702BCE4F1200A197D1 /* SportDetailsTableViewCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +150,8 @@
 		56F88D622BCE160900A197D1 /* Sportsbook.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sportsbook.xctestplan; sourceTree = "<group>"; };
 		56F88D682BCE30DF00A197D1 /* SportCatalogueViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportCatalogueViewModelTests.swift; sourceTree = "<group>"; };
 		56F88D6C2BCE39C000A197D1 /* SportDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		56F88D6E2BCE4C2E00A197D1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		56F88D702BCE4F1200A197D1 /* SportDetailsTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetailsTableViewCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +216,7 @@
 			children = (
 				564A1F0A2BC7C6740012A49B /* SportDetailsViewModel.swift */,
 				564A1F162BC9BD320012A49B /* SportsEventMarketSectionModel.swift */,
+				56F88D702BCE4F1200A197D1 /* SportDetailsTableViewCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				56F88D622BCE160900A197D1 /* Sportsbook.xctestplan */,
+				56F88D6E2BCE4C2E00A197D1 /* README.md */,
 				564A1F112BC9A6C50012A49B /* BaseKit */,
 				56F88D4E2BCDDB7A00A197D1 /* DTOs - Models */,
 				56989F982BBF5BF000A88503 /* Scenes */,
@@ -309,7 +315,7 @@
 			children = (
 				565661212BCC15B4000B2EC3 /* SportsCatalogueViewController.swift */,
 				565661222BCC15B4000B2EC3 /* SportsCatalogueViewController.xib */,
-				56F88D4C2BCDDA5C00A197D1 /* SportsCatalogueCoordinator.swift */,
+				56F88D6F2BCE4EC900A197D1 /* Coordinator */,
 				56F88D512BCDE1A700A197D1 /* SubViews */,
 				56989F9A2BBF5C4B00A88503 /* Models */,
 			);
@@ -357,6 +363,14 @@
 				56596CA22BCADD7C00AD4890 /* SeparatorView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		56F88D6F2BCE4EC900A197D1 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				56F88D4C2BCDDA5C00A197D1 /* SportsCatalogueCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -523,6 +537,7 @@
 				56F88D4D2BCDDA5C00A197D1 /* SportsCatalogueCoordinator.swift in Sources */,
 				5682C46B2BC129190093998D /* SportDetailsViewController.swift in Sources */,
 				56989F8F2BBF2D2400A88503 /* APIResponse.swift in Sources */,
+				56F88D722BCE6C8400A197D1 /* SportDetailsTableViewCellModel.swift in Sources */,
 				5682C4652BC123D20093998D /* CatalogTableViewCell.swift in Sources */,
 				564A1F1A2BC9C12D0012A49B /* APIError.swift in Sources */,
 				56989F912BBF4B5D00A88503 /* APIConfig.swift in Sources */,
@@ -541,6 +556,7 @@
 				56F88D642BCE1CA900A197D1 /* CatalogTableViewCell.swift in Sources */,
 				564A1F182BC9BD320012A49B /* SportsEventMarketSectionModel.swift in Sources */,
 				56989F9D2BBF5EFE00A88503 /* SportModel.swift in Sources */,
+				56F88D712BCE4F1200A197D1 /* SportDetailsTableViewCellModel.swift in Sources */,
 				564A1F032BC708470012A49B /* RunnerModel.swift in Sources */,
 				56F88D5F2BCE111D00A197D1 /* APIResponse.swift in Sources */,
 				56F88D5A2BCE109400A197D1 /* APIConfig.swift in Sources */,

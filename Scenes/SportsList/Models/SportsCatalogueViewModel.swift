@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol SportsCatalogueDelegate {
-    func showSportDetails(for model: SportModel)
-}
-
 enum SportCatalogueViewModelLoadingState {
     case loading
     case finished
@@ -21,9 +17,10 @@ final class SportsCatalogueViewModel {
     @Published var cellModels: [ConfigurableTableViewCellModel] = []
     @Published var sportsCatalogue: [SportModel] = []
     @Published var loadingState: SportCatalogueViewModelLoadingState = .finished
-    
     var coordinatorDelegate: SportsCatalogueDelegate?
     
+    /// Fetch and transform sports list into cell models
+    /// - Parameter apiManager: The APIMaanager instance to be used for firing the request.  Instance other than the default one may mainly be needed for tests.
     func fetchSportsCatalogue(apiManager: APIManagerProtocol = APIManager()) {
         loadingState = .loading
         
@@ -34,8 +31,10 @@ final class SportsCatalogueViewModel {
                     request: sportsRequest,
                     expectedType: SportsResponseModel.self
                 )
+                
                 let sportsList = response.data.data
                 cellModels = []
+                // Create Cell Models array
                 cellModels = sportsList.map { sport in
                     return CatalogTableViewCellModel(
                         sportName: sport.name,
@@ -45,12 +44,18 @@ final class SportsCatalogueViewModel {
                 sportsCatalogue = sportsList
                 loadingState = .finished
             } catch {
-                loadingState = .error(error as! APIError)
+                if let error = error as? APIError {
+                    loadingState = .error(error)
+                } else {
+                    loadingState = .error(APIError.other(error))
+                }
                 print("Error: \(error.localizedDescription)")
             }
         }
     }
     
+    /// Implementation of SportsCatalogueDelegate protocol. Used for the Coordinator delegation
+    /// - Parameter model: Sport to show the market details for
     func showSportDetails(for model: SportModel) {
         guard let coordinatorDelegate = coordinatorDelegate else {
             print("Critical error: No coordinator delegate in SportsCatalogueViewModel.")
@@ -59,4 +64,9 @@ final class SportsCatalogueViewModel {
         coordinatorDelegate.showSportDetails(for: model)
     }
     
+}
+
+/// Protocol for the coordinator delegate
+protocol SportsCatalogueDelegate: AnyObject {
+    func showSportDetails(for model: SportModel)
 }

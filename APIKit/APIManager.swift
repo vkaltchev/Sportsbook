@@ -44,7 +44,6 @@ struct APIManager: APIManagerProtocol {
         request: any APIRequest,
         expectedType: ModelType.Type = String.self
     ) async throws -> APIResponse<ModelType> {
-
         guard let urlSession = self.urlSession else {
             throw APIError.invalidSession
         }

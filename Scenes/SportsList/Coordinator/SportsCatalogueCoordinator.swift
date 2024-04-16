@@ -25,6 +25,10 @@ final class SportsCatalogueCoordinator: Coordinator {
     }
 }
 
+// **********************************
+// MARK: - SportsCatalogue Delegate
+// **********************************
+
 extension SportsCatalogueCoordinator: SportsCatalogueDelegate {
     
     func showSportDetails(for model: SportModel) {

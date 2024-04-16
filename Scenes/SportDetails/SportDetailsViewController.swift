@@ -38,7 +38,7 @@ final class SportDetailsViewController: BaseViewController<SportDetailsViewModel
             }
             .store(in: &bindings)
         
-        // bind loading state. TODO: Improve error handling
+        // TODO: Improve error handling
         viewModel.$loadingState
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
