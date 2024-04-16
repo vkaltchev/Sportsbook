@@ -8,22 +8,20 @@
 import Foundation
 
 struct SportsRequest: APIRequest {
-//    typealias ResponseType = <#type#>
-    
-    var baseUrl: String = Config.default.baseUrl
+    var baseUrl: String = APIConfig.default.baseUrl
     var path: String = "/sports"
     var method: HTTPMethod = .get
     var requiresAuthorization: Bool = true
-    var headers: [String : String] = Config.default.headers
+    var headers: [String : String] = APIConfig.default.headers
 }
 
 struct SportsDetailRequest: APIRequest {
     let sportId: Int
     let path: String
-    var baseUrl: String = Config.default.baseUrl
+    var baseUrl: String = APIConfig.default.baseUrl
     var method: HTTPMethod = .get
     var requiresAuthorization: Bool = true
-    var headers: [String : String] = Config.default.headers
+    var headers: [String : String] = APIConfig.default.headers
     
     init(sportId: Int) {
         self.sportId = sportId

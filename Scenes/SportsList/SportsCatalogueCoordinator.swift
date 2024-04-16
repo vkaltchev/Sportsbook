@@ -19,6 +19,7 @@ final class SportsCatalogueCoordinator: Coordinator {
     override func start() {
         let viewModel = SportsCatalogueViewModel()
         viewModel.coordinatorDelegate = self
+        viewModel.fetchSportsCatalogue()
         let rootVC = SportsCatalogueViewController(viewModel: viewModel)
         navigationController.pushViewController(rootVC, animated: true)
     }
@@ -28,6 +29,7 @@ extension SportsCatalogueCoordinator: SportsCatalogueDelegate {
     
     func showSportDetails(for model: SportModel) {
         let sportDetailsViewModel = SportDetailsViewModel(sportModel: model)
+        sportDetailsViewModel.fetchAndTransformSportsEvents(forSportWith: model.id)
         let detailsVC = SportDetailsViewController(viewModel: sportDetailsViewModel)
         navigationController.pushViewController(detailsVC, animated: true)
     }

@@ -11,7 +11,7 @@ protocol SportsCatalogueDelegate {
     func showSportDetails(for model: SportModel)
 }
 
-enum SportViewModelLoadingState {
+enum SportCatalogueViewModelLoadingState {
     case loading
     case finished
     case error(APIError)
@@ -20,21 +20,17 @@ enum SportViewModelLoadingState {
 final class SportsCatalogueViewModel {
     @Published var cellModels: [ConfigurableTableViewCellModel] = []
     @Published var sportsCatalogue: [SportModel] = []
-    @Published var loadingState: SportViewModelLoadingState = .finished
+    @Published var loadingState: SportCatalogueViewModelLoadingState = .finished
     
     var coordinatorDelegate: SportsCatalogueDelegate?
     
-    init() {
-        fetchSportsCatalogue()
-    }
-    
-    func fetchSportsCatalogue() {
+    func fetchSportsCatalogue(apiManager: APIManagerProtocol = APIManager()) {
         loadingState = .loading
         
         Task {
             do {
                 let sportsRequest = SportsRequest()
-                let response = try await APIManager().execute(
+                let response = try await apiManager.execute(
                     request: sportsRequest,
                     expectedType: SportsResponseModel.self
                 )
@@ -56,7 +52,11 @@ final class SportsCatalogueViewModel {
     }
     
     func showSportDetails(for model: SportModel) {
-        coordinatorDelegate?.showSportDetails(for: model)
+        guard let coordinatorDelegate = coordinatorDelegate else {
+            print("Critical error: No coordinator delegate in SportsCatalogueViewModel.")
+            return
+        }
+        coordinatorDelegate.showSportDetails(for: model)
     }
     
 }

@@ -14,7 +14,6 @@ enum HTTPMethod: String {
 }
 
 protocol APIRequest {
-//    associatedtype ResponseType: Decodable
     var baseUrl: String { get } // move this elsewhere
     var path: String { get }
     var method: HTTPMethod { get }
@@ -39,12 +38,12 @@ extension APIRequest {
     }
 
     func urlRequest() throws -> URLRequest {
-        guard let url = URL(string: Config.default.baseUrl + path) else {
+        guard let url = URL(string: APIConfig.default.baseUrl + path) else {
             throw APIError.invalidURL
         }
         
         var urlRequest = URLRequest(url: url)
-        urlRequest.timeoutInterval = Config.default.requestTimeout
+        urlRequest.timeoutInterval = APIConfig.default.requestTimeout
         urlRequest.httpMethod = method.rawValue
         let headers = buildHeaders(headers, authorized: requiresAuthorization)
         for (key, value) in headers {
@@ -61,7 +60,7 @@ extension APIRequest {
         }
         
         if authorized {
-            requestHeaders["Authorization"] = "Bearer \(Config.default.authToken)" // hardcoded for now TODO: extend with authorization logic and types.
+            requestHeaders["Authorization"] = "Bearer \(APIConfig.default.authToken)" // hardcoded for now TODO: extend with authorization logic and types.
         }
         return requestHeaders
     }

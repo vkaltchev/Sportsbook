@@ -8,11 +8,11 @@
 import Foundation
 
 struct APIResponse<ModelType> {
-    public let statusCode: Int
-    public let data: ModelType
-    public let responseHeaders: [AnyHashable: Any]
+    let statusCode: Int
+    let data: ModelType
+    let responseHeaders: [AnyHashable: Any]
 
-    public init(statusCode: Int, data: ModelType, responseHeaders: [AnyHashable: Any] = [:]) {
+    init(statusCode: Int, data: ModelType, responseHeaders: [AnyHashable: Any] = [:]) {
         self.statusCode = statusCode
         self.data = data
         self.responseHeaders = responseHeaders

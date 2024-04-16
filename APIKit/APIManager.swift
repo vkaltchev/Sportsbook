@@ -7,6 +7,9 @@
 
 import Foundation
 
+// TODO: A lot can be done to improve the APIKit. This is a basic implementation to start with
+// Add better error handling. Add Environment manager. Add mock/test environment. Add logging with levels or configurable based on environment or other setting.
+
 typealias HTTPHeaders = [String: String]
 
 protocol APIManagerProtocol {
@@ -15,7 +18,6 @@ protocol APIManagerProtocol {
         expectedType: ModelType.Type
     ) async throws -> APIResponse<ModelType>
 }
-
 
 struct APIManager: APIManagerProtocol {
     
@@ -32,7 +34,12 @@ struct APIManager: APIManagerProtocol {
     ) {
         self.urlSession = urlSession
     }
-
+    
+    /// Executes a Request with URLSession and returns an APIResponse with the expected <ModelType>
+    /// - Parameters:
+    ///   - request: Request instance
+    ///   - expectedType: response model type expected to be returned
+    /// - Returns: APIResponse instance with data of the expected ModelType
     func execute<ModelType: Decodable>(
         request: any APIRequest,
         expectedType: ModelType.Type = String.self

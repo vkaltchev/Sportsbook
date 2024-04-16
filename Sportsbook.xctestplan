@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "620C12FF-6BDA-4681-954C-A003511F394B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Sportsbook.xcodeproj",
+      "identifier" : "56954E752BBEDBFF002FC8D0",
+      "name" : "Sportsbook"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Sportsbook.xcodeproj",
+        "identifier" : "56954E8B2BBEDC00002FC8D0",
+        "name" : "SportsbookTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Sportsbook.xcodeproj",
+        "identifier" : "56954E952BBEDC00002FC8D0",
+        "name" : "SportsbookUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

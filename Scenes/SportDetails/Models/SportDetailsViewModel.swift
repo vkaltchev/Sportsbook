@@ -26,12 +26,12 @@ final class SportDetailsViewModel {
     /// Fires a request for Sport events and markets and transforms the result into table datasource models.
     /// Also changes the loadingState based on the request progress/result.
     /// - Parameter id: The id of the sport we're requesting the events and markets for.
-    func fetchAndTransformSportsEvents(forSportWith id: Int) {
+    func fetchAndTransformSportsEvents(forSportWith id: Int, apiManager: APIManagerProtocol = APIManager()) {
         loadingState = .loading
         Task {
             do {
                 let sportEventRequest = SportsDetailEventsRequest(sportId: id)
-                let response = try await APIManager().execute(
+                let response = try await apiManager.execute(
                     request: sportEventRequest,
                     expectedType: SportDetailEventsResponseModel.self
                 )

@@ -10,10 +10,10 @@ import Foundation
 struct SportsDetailEventsRequest: APIRequest {
     let sportId: Int
     let path: String
-    var baseUrl: String = Config.default.baseUrl
+    var baseUrl: String = APIConfig.default.baseUrl
     var method: HTTPMethod = .get
     var requiresAuthorization: Bool = true
-    var headers: [String : String] = Config.default.headers
+    var headers: [String : String] = APIConfig.default.headers
     
     init(sportId: Int) {
         self.sportId = sportId

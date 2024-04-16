@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Config {
+struct APIConfig {
 
-    public static let `default` = Config()
+    public static let `default` = APIConfig()
 
     let baseUrl: String = "http://localhost:8080" // move out from here eventually
     let authToken: String = "ewogICAibmFtZSI6ICJHdWVzdCIKfQ==" // harcoded for now. TODO: Extend with authorization logic in future
